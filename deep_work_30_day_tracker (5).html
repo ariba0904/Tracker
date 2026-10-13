@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Deep Work — 30-Day Focus Tracker</title>
+<style>
+:root{--bg:#0c0a12;--panel:#171321;--panel2:#211a30;--text:#f8f5ff;--muted:#b9afcb;--line:#393047;--accent:#c4a7ff;--accent2:#8f6be8;--good:#8de0bd;--warn:#ffd27d}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top left,#241839 0%,var(--bg) 48%);color:var(--text);font:15px/1.6 Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif}
+.wrap{max-width:1180px;margin:auto;padding:28px 18px 56px}.hero{padding:32px;border:1px solid var(--line);border-radius:24px;background:linear-gradient(130deg,#21172fdd,#15111fef);box-shadow:0 20px 60px #0003}
+.eyebrow{color:var(--accent);text-transform:uppercase;letter-spacing:.16em;font-size:.75rem;font-weight:800}.hero h1{font-size:clamp(2rem,5vw,3.5rem);line-height:1.08;letter-spacing:-.04em;margin:10px 0}.hero p{max-width:760px;color:var(--muted);margin-bottom:0}
+.pills{display:flex;gap:9px;flex-wrap:wrap;margin-top:22px}.pill{border:1px solid #55456c;border-radius:999px;padding:6px 12px;color:#e5d9ff;background:#ffffff08;font-size:.82rem}
+section{margin-top:28px}.section-head{display:flex;justify-content:space-between;align-items:end;gap:12px;flex-wrap:wrap;margin-bottom:14px}h2{font-size:1.4rem;margin:0;letter-spacing:-.02em}h3{font-size:1rem;margin:0 0 7px}.sub{color:var(--muted);font-size:.9rem;margin:4px 0 0}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.card{background:linear-gradient(150deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:18px;padding:19px}.num{font-size:.75rem;color:var(--accent);font-weight:800;letter-spacing:.1em}.card p{color:var(--muted);margin:6px 0 0}.learn-list{display:grid;gap:10px}.learn{display:flex;gap:13px;align-items:flex-start;background:#ffffff05;border:1px solid var(--line);border-radius:14px;padding:13px 15px}.learn .n{display:grid;place-items:center;flex:0 0 28px;height:28px;border-radius:9px;background:#382750;color:#e9dcff;font-weight:800}
+table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:13px 14px;border-bottom:1px solid var(--line);vertical-align:top}th{font-size:.8rem;color:var(--accent);text-transform:uppercase;letter-spacing:.06em}td{color:var(--muted)}td strong{color:var(--text)}.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:16px;background:var(--panel)}.table-wrap table{min-width:620px}
+.tracker-top{display:flex;gap:12px;flex-wrap:wrap;align-items:center}.stat{min-width:135px;flex:1;background:var(--panel);border:1px solid var(--line);border-radius:15px;padding:14px 16px}.stat span{display:block;color:var(--muted);font-size:.78rem}.stat strong{font-size:1.55rem}.progress{height:8px;background:#342b43;border-radius:99px;overflow:hidden;margin-top:9px}.bar{height:100%;width:0;background:linear-gradient(90deg,var(--accent2),var(--good));transition:width .2s}
+.tracker-shell{overflow:auto;border:1px solid var(--line);border-radius:16px;background:var(--panel)}.tracker{min-width:720px}.tracker th:first-child,.tracker td:first-child{position:sticky;left:0;background:#171321;z-index:1}.tracker th{background:#211a30}.tracker td{text-align:center}.tracker td:first-child{text-align:left;color:var(--text);white-space:nowrap}.tracker input[type=checkbox]{width:20px;height:20px;accent-color:#b69aff;cursor:pointer}.today td{background:#28203a}.today td:first-child{background:#28203a}
+.badge{display:inline-block;border-radius:999px;padding:4px 10px;font-weight:800;font-size:.82rem;background:#302640;color:#e5d9ff}.remark{font-size:1.05rem;color:var(--good);font-weight:800}.note{color:var(--muted);font-size:.86rem}.btn{background:#c4a7ff;color:#1a1128;border:0;border-radius:11px;padding:10px 14px;font-weight:800;cursor:pointer}.btn.secondary{background:#2a2238;color:var(--text);border:1px solid #4a3d5e}.btn.danger{background:#3b202a;color:#ffd7df;border:1px solid #70404d}.controls{display:flex;gap:8px;flex-wrap:wrap}.editgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.editbox{display:grid;gap:8px}.editbox label{font-size:.8rem;color:var(--accent);font-weight:800}.editbox input,.editbox textarea,.dateinput{width:100%;background:#100d18;color:var(--text);border:1px solid #4b3d60;border-radius:10px;padding:10px;font:inherit}.editbox textarea{min-height:86px;resize:vertical}.footer{text-align:center;color:#9186a5;margin-top:32px;font-size:.8rem}
+@media(max-width:760px){.grid,.editgrid{grid-template-columns:1fr}.hero{padding:24px}.wrap{padding:16px 12px 40px}.card{padding:16px}}
+
+/* Soft baby-pink + lavender theme */
+:root{--bg:#fff8fc;--panel:#ffffff;--panel2:#fff0f8;--text:#49364f;--muted:#806c86;--line:#efd7e9;--accent:#b17bc5;--accent2:#d78fbd;--good:#6b9d8c;--warn:#c99b52}
+body{background:radial-gradient(ellipse at 8% 0%,#ffe4f1 0%,transparent 42%),radial-gradient(ellipse at 95% 10%,#eee3ff 0%,transparent 38%),var(--bg);color:var(--text)}
+.hero{border-color:#efcfe5;background:linear-gradient(130deg,#ffe9f4ee,#f1eaffee);box-shadow:0 18px 50px #d7a9cb2b}
+.eyebrow{color:#a15fb4}.hero h1 span{color:#b17bc5!important}.hero p,.card p,.learn .note{color:var(--muted)}
+.pill{border-color:#e7c6e2;color:#81578e;background:#ffffffa8}
+.card{background:linear-gradient(150deg,#fff4fa,#fff);border-color:#efd9eb;box-shadow:0 6px 22px #d7b4d02a}
+.learn{background:#ffffffb8;border-color:#efd9eb}.learn .n{background:#f5d9eb;color:#8f5a9f}
+th{color:#a15fb4}.table-wrap,.tracker-shell{border-color:#efd7e9;background:#fff}
+.tracker th{background:#f7e7f4;color:#8d5a9e}.tracker th:first-child,.tracker td:first-child{background:#fff9fd}.tracker td{border-bottom-color:#f3e3ef}.tracker input[type=checkbox]{accent-color:#c17fc2}
+.today td,.today td:first-child{background:#fff0f7}
+.stat{background:#fff;border-color:#efd7e9;box-shadow:0 5px 18px #d7b4d022}.progress{background:#f4e4f1}.bar{background:linear-gradient(90deg,#d78fbd,#b69ae8)}
+.badge{background:#f7e5f5;color:#925ca2}.remark{color:#568d7c}
+.btn{background:linear-gradient(135deg,#e9b6d8,#d8c2f4);color:#563b60}.btn.secondary{background:#fff3fa;color:#755781;border-color:#e7cce5}.btn.danger{background:#fff0f2;color:#a3546b;border-color:#efcbd5}
+.editbox label{color:#a15fb4}.editbox input,.editbox textarea,.dateinput{background:#fffbfe;color:var(--text);border-color:#e8cfe5}.editbox input:focus,.editbox textarea:focus,.dateinput:focus{outline:2px solid #e5b8dc;outline-offset:1px}
+.footer{color:#a38ba7}.month-nav{align-items:center}.bottom-summary{background:linear-gradient(135deg,#fff0f8,#f3edff);border-color:#e8cbe9}.summary-line{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}.summary-line strong{font-size:2.3rem;letter-spacing:-.04em;color:#a15fb4}.summary-line span{color:var(--muted)}.summary-progress{height:12px}
+</style>
+</head>
+<body><main class="wrap">
+<header class="hero">
+<div class="eyebrow">A personal 30-day experiment</div>
+<h1>Deep Work, <span style="color:var(--accent)">one day at a time.</span></h1>
+<p>A practical tracker inspired by the Shortform summary of <em>Deep Work</em> by Cal Newport: protect focused time, reduce distractions, and review progress consistently.</p>
+<div class="pills"><span class="pill">30-day challenge</span><span class="pill" id="dateRange">Starting today</span><span class="pill">Progress saved in this browser</span></div>
+</header>
+<section>
+<div class="section-head"><div><h2>1. Five things I learned</h2><p class="sub">Key lessons from the full 46-page PDF summary.</p></div></div>
+<div class="learn-list">
+<div class="learn"><span class="n">1</span><div><strong>Deep work creates valuable results.</strong><div class="note">Focused, uninterrupted effort helps me learn challenging skills and produce higher-quality work.</div></div></div>
+<div class="learn"><span class="n">2</span><div><strong>Shallow work can feel productive without moving me forward.</strong><div class="note">Constant messages, notifications, and low-value tasks can crowd out the work that matters most.</div></div></div>
+<div class="learn"><span class="n">3</span><div><strong>Focus improves through practice.</strong><div class="note">Like a muscle, concentration grows when I train it regularly and learn to tolerate boredom without reaching for my phone.</div></div></div>
+<div class="learn"><span class="n">4</span><div><strong>Structure makes focus easier.</strong><div class="note">Scheduling focused blocks, planning tasks, and preparing a quiet work environment make deep work more repeatable.</div></div></div>
+<div class="learn"><span class="n">5</span><div><strong>Measure progress, review weekly, and rest deliberately.</strong><div class="note">Visible metrics and a weekly review help me adjust; a shutdown routine and genuine downtime protect tomorrow’s focus.</div></div></div>
+</div>
+</section>
+<section>
+<div class="section-head"><div><h2>2. Top three things I want to implement in my life</h2><p class="sub">Three small habits that are realistic enough to repeat.</p></div></div>
+<div class="grid">
+<div class="card"><div class="num">TASK 1</div><h3>Daily deep-work session</h3><p>Complete one focused 45-minute session on my most important study or skill-building task, with one task at a time.</p></div>
+<div class="card"><div class="num">TASK 2</div><h3>Control digital distractions</h3><p>Keep my phone away and notifications off during the session. Check social media only during planned breaks.</p></div>
+<div class="card"><div class="num">TASK 3</div><h3>Plan and review</h3><p>Write the day’s priority before starting, then spend five minutes reviewing progress and planning the next day.</p></div>
+</div>
+</section>
+<section>
+<div class="section-head"><div><h2>3. How I will implement the three tasks</h2><p class="sub">A simple action plan to make each habit concrete.</p></div></div>
+<div class="table-wrap"><table><thead><tr><th style="width:110px">Task</th><th>How I will implement it</th></tr></thead><tbody id="planRows"></tbody></table></div>
+<p class="note" style="margin-top:10px">You can personalize the task names and implementation steps below. Changes are saved automatically in this browser.</p>
+<div class="card" style="margin-top:14px"><div class="editgrid" id="editFields"></div><div class="controls" style="margin-top:12px"><button class="btn" id="savePlan">Save my plan</button><button class="btn secondary" id="restorePlan">Restore suggested plan</button></div></div>
+</section>
+<section>
+<div class="section-head"><div><h2>4. My monthly tracker</h2><p class="sub">Choose any month and year. The tracker will automatically show every date in that month.</p></div><div class="controls"><button class="btn secondary" id="exportBtn">Export CSV</button><button class="btn danger" id="resetBtn">Reset this month</button></div></div>
+<div class="card month-picker-card" style="margin-bottom:14px">
+  <div class="editgrid" style="align-items:end">
+    <div class="editbox"><label for="monthPicker">CHOOSE TRACKER MONTH</label><input class="dateinput" type="month" id="monthPicker" value="2026-10"></div>
+    <div class="controls month-nav"><button class="btn secondary" id="prevMonth" type="button" aria-label="Previous month">← Previous</button><button class="btn secondary" id="currentMonth" type="button">Current month</button><button class="btn secondary" id="nextMonth" type="button" aria-label="Next month">Next →</button></div>
+    <div><strong id="selectedMonthLabel">October 2026</strong><div class="note">Your monthly planner 🌸</div></div>
+  </div>
+</div>
+<div class="tracker-top">
+<div class="stat"><span>Overall completion</span><strong id="overallPct">0%</strong><div class="progress"><div class="bar" id="overallBar"></div></div></div>
+<div class="stat"><span>Completed task-days</span><strong id="doneCount">0 / 90</strong></div>
+<div class="stat"><span>Days with all 3 tasks done</span><strong id="fullDays">0 / 30</strong></div>
+<div class="stat"><span id="remarkLabel">Monthly remark</span><div class="remark" id="remark">Not rated yet</div></div>
+</div>
+<p class="note" style="margin:12px 0">Scoring: each checked task is one completed task-day. Overall percentage = checked task boxes ÷ (number of days in the selected month × 3) × 100. Individual task percentages are shown below.</p>
+<div class="tracker-shell"><table class="tracker"><thead><tr><th>Date</th><th id="head0">Task 1</th><th id="head1">Task 2</th><th id="head2">Task 3</th><th>Daily result</th></tr></thead><tbody id="trackerBody"></tbody></table></div>
+<div class="grid" id="taskStats" style="margin-top:14px"></div>
+<div class="card" style="margin-top:14px"><div class="section-head"><div><h3>My weekly reflection</h3><p class="note">Write freely. Notes auto-save as you type; press Ctrl + Enter to save immediately, or use the button.</p></div><div class="controls"><button class="btn" id="saveReflection" type="button">Save reflection</button></div></div><textarea id="reflection" class="dateinput" rows="4" placeholder="What worked this week? What will I change next week?"></textarea><p class="note" id="reflectionStatus" aria-live="polite" style="margin-bottom:0">No changes yet.</p></div>
+<div class="card bottom-summary" style="margin-top:14px"><div class="section-head"><div><h3>Monthly completion summary</h3><p class="note">Your score is calculated from the checkboxes you actually marked complete.</p></div><div class="badge" id="bottomRemark">Not rated yet</div></div><div class="summary-line"><strong id="bottomPct">0%</strong><span id="bottomCounts">0 of 90 task checkboxes completed</span></div><div class="progress summary-progress"><div class="bar" id="bottomBar"></div></div><p class="note" style="margin-bottom:0">Formula: completed checkboxes ÷ all available task checkboxes for this month × 100. The percentage updates whenever you change a checkbox.</p></div>
+</section>
+<section>
+<div class="section-head"><div><h2>Scoring guide</h2><p class="sub">A practical scale for your final 30-day percentage.</p></div></div>
+<div class="grid">
+<div class="card"><span class="badge">90–100%</span><h3 style="margin-top:10px">Excellent</h3><p>Strong consistency. Keep the habits going.</p></div>
+<div class="card"><span class="badge">80–89%</span><h3 style="margin-top:10px">Great</h3><p>Very good progress. Improve the few missed days.</p></div>
+<div class="card"><span class="badge">70–79%</span><h3 style="margin-top:10px">Good</h3><p>A solid start. Identify your most common obstacles.</p></div>
+<div class="card"><span class="badge">60–69%</span><h3 style="margin-top:10px">Fair</h3><p>Make the tasks easier to start and protect a set time.</p></div>
+<div class="card"><span class="badge">Below 60%</span><h3 style="margin-top:10px">Needs improvement</h3><p>Reset with smaller steps; consistency matters more than perfection.</p></div>
+</div>
+</section>
+<div class="footer">Built for personal use · Each month’s checkmarks and notes stay in this browser unless you export them.</div>
+</main>
+<script>
+const defaults = [
+ {name:"Daily deep-work session",how:"Choose one high-priority study or skill-building task. Put it on my schedule and work on it for 45 uninterrupted minutes. If 45 minutes feels difficult, start smaller and build up."},
+ {name:"Control digital distractions",how:"Before starting, silence notifications and place my phone out of reach. Keep only the materials needed for the task open, and check social media during a planned break."},
+ {name:"Plan and review",how:"Write my most important task before the session. At the end of the day, spend five minutes checking what I completed, recording an obstacle, and choosing tomorrow’s priority."}
+];
+let selectedMonth = "2026-10";
+let startDate = new Date(2026,9,1);
+let days = new Date(2026,10,0).getDate();
+let state;
+function monthKey(){return "deepwork_month_"+selectedMonth}
+function fresh(){return {tasks:defaults.map(x=>({...x})),checks:Array.from({length:days},()=>[false,false,false]),reflection:""}}
+function load(){
+ try{
+  let s=JSON.parse(localStorage.getItem(monthKey()));
+  if(s&&s.tasks&&s.checks&&s.checks.length===days)return s;
+ }catch(e){}
+ // Bring forward the original October tracker if it exists in this browser.
+ if(selectedMonth==="2026-10"){
+  try{
+   let old=JSON.parse(localStorage.getItem("deepwork30_v1"));
+   if(old&&old.tasks&&old.checks){
+    let migrated=fresh();
+    migrated.tasks=old.tasks;
+    migrated.reflection=old.reflection||"";
+    old.checks.forEach((r,i)=>{if(i<days)migrated.checks[i]=r});
+    return migrated;
+   }
+  }catch(e){}
+ }
+ return fresh()
+}
+function persist(){localStorage.setItem(monthKey(),JSON.stringify(state))}
+function fmt(d){return d.toLocaleDateString(undefined,{month:"short",day:"numeric",year:"numeric"})}
+function dateFor(i){return new Date(startDate.getFullYear(),startDate.getMonth(),i+1)}
+function setMonth(value){
+ if(!/^\d{4}-\d{2}$/.test(value))return;
+ const parts=value.split("-").map(Number);
+ if(parts[1]<1||parts[1]>12)return;
+ selectedMonth=value;
+ startDate=new Date(parts[0],parts[1]-1,1);
+ days=new Date(parts[0],parts[1],0).getDate();
+ state=load();
+ document.getElementById("monthPicker").value=selectedMonth;
+ document.getElementById("selectedMonthLabel").textContent=startDate.toLocaleDateString(undefined,{month:"long",year:"numeric"});
+ document.getElementById("dateRange").textContent=fmt(startDate)+" – "+fmt(dateFor(days-1));
+ document.querySelector("#overallPct").parentElement.querySelector("span").textContent="Monthly completion";
+ document.getElementById("doneCount").parentElement.querySelector("span").textContent="Completed task-days";
+ document.getElementById("fullDays").parentElement.querySelector("span").textContent="Days with all 3 tasks done";
+ document.getElementById("remarkLabel").textContent="Monthly remark";
+ document.getElementById("reflection").value=state.reflection||"";
+ const status=document.getElementById("reflectionStatus");if(status)status.textContent=state.reflection?"Saved notes loaded for this month.":"No notes saved for this month yet.";
+ renderPlan();renderTracker();updateStats();
+}
+state=load();
+function renderPlan(){
+ const rows=document.getElementById("planRows"); rows.innerHTML="";
+ state.tasks.forEach((t,i)=>{let tr=document.createElement("tr");tr.innerHTML=`<td><strong>Task ${i+1}</strong></td><td>${escapeHTML(t.how)}</td>`;rows.appendChild(tr)});
+ const edits=document.getElementById("editFields"); edits.innerHTML="";
+ state.tasks.forEach((t,i)=>{const div=document.createElement("div");div.className="editbox";div.innerHTML=`<label for="taskname${i}">TASK ${i+1} NAME</label><input id="taskname${i}" value="${escapeAttr(t.name)}" maxlength="70"><label for="taskhow${i}">IMPLEMENTATION</label><textarea id="taskhow${i}">${escapeHTML(t.how)}</textarea>`;edits.appendChild(div)});
+ state.tasks.forEach((t,i)=>document.getElementById("head"+i).textContent=t.name);
+}
+function renderTracker(){
+ const body=document.getElementById("trackerBody");body.innerHTML="";
+ for(let d=0;d<days;d++){
+  const tr=document.createElement("tr");if(dateFor(d).toDateString()===new Date().toDateString())tr.className="today";
+  const dateCell=document.createElement("td");dateCell.textContent=fmt(dateFor(d));tr.appendChild(dateCell);
+  for(let t=0;t<3;t++){const td=document.createElement("td");const cb=document.createElement("input");cb.type="checkbox";cb.checked=!!state.checks[d][t];cb.setAttribute("aria-label",`${state.tasks[t].name} on ${fmt(dateFor(d))}`);cb.addEventListener("change",()=>{state.checks[d][t]=cb.checked;persist();updateStats()});td.appendChild(cb);tr.appendChild(td)}
+  const result=document.createElement("td");result.className="dailyresult";result.textContent=state.checks[d].every(Boolean)?"3 / 3 complete":`${state.checks[d].filter(Boolean).length} / 3 complete`;tr.appendChild(result);body.appendChild(tr)
+ }
+}
+function updateStats(){
+ const all=state.checks.flat().filter(Boolean).length,total=days*3,pct=Math.round(all/total*100),full=state.checks.filter(x=>x.every(Boolean)).length;
+ document.getElementById("overallPct").textContent=pct+"%";document.getElementById("overallBar").style.width=pct+"%";document.getElementById("doneCount").textContent=`${all} / ${total}`;document.getElementById("fullDays").textContent=`${full} / ${days}`;
+ let remark=pct>=90?"Excellent":pct>=80?"Great":pct>=70?"Good":pct>=60?"Fair":all===0?"Not rated yet":"Needs improvement";
+ document.getElementById("remark").textContent=remark;
+ document.getElementById("bottomPct").textContent=pct+"%";document.getElementById("bottomCounts").textContent=`${all} of ${total} task checkboxes completed`;document.getElementById("bottomBar").style.width=pct+"%";document.getElementById("bottomRemark").textContent=remark;
+ [...document.querySelectorAll(".dailyresult")].forEach((el,i)=>el.textContent=state.checks[i].every(Boolean)?"3 / 3 complete":`${state.checks[i].filter(Boolean).length} / 3 complete`);
+ const stats=document.getElementById("taskStats");stats.innerHTML="";
+ state.tasks.forEach((t,i)=>{let n=state.checks.filter(r=>r[i]).length,p=Math.round(n/days*100),c=document.createElement("div");c.className="card";c.innerHTML=`<div class="num">TASK ${i+1}</div><h3>${escapeHTML(t.name)}</h3><strong style="font-size:1.5rem">${p}%</strong><p>${n} of ${days} days completed</p><div class="progress"><div class="bar" style="width:${p}%"></div></div>`;stats.appendChild(c)});
+}
+function escapeHTML(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function escapeAttr(s){return escapeHTML(s)}
+document.getElementById("savePlan").addEventListener("click",()=>{state.tasks.forEach((t,i)=>{t.name=document.getElementById("taskname"+i).value.trim()||defaults[i].name;t.how=document.getElementById("taskhow"+i).value.trim()||defaults[i].how});persist();renderPlan();renderTracker();updateStats()});
+document.getElementById("restorePlan").addEventListener("click",()=>{if(confirm("Restore the suggested task names and steps? Your daily checkmarks will stay.")){state.tasks=defaults.map(x=>({...x}));persist();renderPlan();renderTracker();updateStats()}});
+document.getElementById("reflection").value=state.reflection||"";
+const reflectionBox=document.getElementById("reflection");
+const reflectionStatus=document.getElementById("reflectionStatus");
+function saveReflection(showMessage=true){state.reflection=reflectionBox.value;persist();if(showMessage)reflectionStatus.textContent="Saved for "+startDate.toLocaleDateString(undefined,{month:"long",year:"numeric"})+" ✓";}
+reflectionBox.addEventListener("input",()=>{state.reflection=reflectionBox.value;persist();reflectionStatus.textContent="Auto-saved ✓";});
+document.getElementById("saveReflection").addEventListener("click",()=>saveReflection(true));
+reflectionBox.addEventListener("keydown",e=>{if(e.key==="Enter"&&(e.ctrlKey||e.metaKey)){e.preventDefault();saveReflection(true);}});
+document.getElementById("resetBtn").addEventListener("click",()=>{if(confirm(`Clear all ${days} days of checkmarks and your reflection for ${startDate.toLocaleDateString(undefined,{month:"long",year:"numeric"})}? This cannot be undone.`)){state.checks=Array.from({length:days},()=>[false,false,false]);state.reflection="";persist();document.getElementById("reflection").value="";document.getElementById("reflectionStatus").textContent="Reflection cleared.";renderTracker();updateStats()}});
+document.getElementById("exportBtn").addEventListener("click",()=>{let rows=[["Date",...state.tasks.map(t=>t.name),"Daily completed count"],...state.checks.map((r,i)=>[fmt(dateFor(i)),...r.map(v=>v?"Done":"Incomplete"),r.filter(Boolean).length+"/3"])];let csv=rows.map(r=>r.map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(",")).join("\r\n");let a=document.createElement("a");a.href=URL.createObjectURL(new Blob([csv],{type:"text/csv;charset=utf-8;"}));a.download=`deep-work-tracker-${selectedMonth}.csv`;a.click();URL.revokeObjectURL(a.href)});
+document.getElementById("monthPicker").value=selectedMonth;
+document.getElementById("monthPicker").addEventListener("change",e=>setMonth(e.target.value));
+function shiftMonth(delta){const d=new Date(startDate.getFullYear(),startDate.getMonth()+delta,1);setMonth(`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}`)}
+document.getElementById("prevMonth").addEventListener("click",()=>shiftMonth(-1));
+document.getElementById("nextMonth").addEventListener("click",()=>shiftMonth(1));
+document.getElementById("currentMonth").addEventListener("click",()=>{const d=new Date();setMonth(`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}`)});
+setMonth(selectedMonth);
+</script></body></html>
