@@ -64,7 +64,7 @@ Potential enhancements include:
 
 ## 👩‍💻 Author
 
-**J. M. Ariba**
+**Jannatul Maowa Ariba**
 
 - GitHub: [@ariba0904](https://github.com/ariba0904)
 - Portfolio: [j-m-ariba.vercel.app](https://j-m-ariba.vercel.app/)
