@@ -52,16 +52,6 @@ The application uses browser `localStorage` for supported data persistence.
 - Clearing browser site data may remove saved information.
 - The application does not currently provide user authentication or cloud-based storage.
 
-## 🎯 Project Goals
-
-This project demonstrates practical frontend development skills, including:
-
-- Building interactive web interfaces
-- Working with JavaScript and browser APIs
-- Managing client-side data
-- Integrating a CSS framework into an existing project
-- Organizing a project for maintainability
-
 ## 🔮 Future Improvements
 
 Potential enhancements include:
