@@ -43,16 +43,6 @@ Tracker/
 └── README.md
 ```
 
-
-## ⚙️ Getting Started
-
-### Prerequisites
-
-- A modern web browser
-- [Node.js](https://nodejs.org/) and npm
-- [Visual Studio Code](https://code.visualstudio.com/) (recommended)
-
-
 ## 💾 Data Storage
 
 The application uses browser `localStorage` for supported data persistence.
