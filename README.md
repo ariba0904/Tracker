@@ -4,30 +4,31 @@ A simple, responsive habit-tracking web application designed to help users build
 
 ## ✨ Overview
 
-**My Habit Tracker** is a browser-based productivity application that helps users organize their daily habits and track their progress through monthly and weekly summaries.
+**My Habit Tracker** is a browser-based productivity application that helps users organize their daily tasks, track progress through monthly and weekly summaries, and build better routines.
 
-This is focuses on a clean user interface, practical habit management, and persistent local data storage.
+The application focuses on a clean user interface, customizable tasks, practical habit management, and persistent local data storage.
 
 ## 🚀 Features
 
-- **Daily Habit Tracking** — Track the completion of daily habits.
-- **Monthly Overview** — Review habit progress throughout the month.
-- **Weekly Snapshot** — View weekly habit completion and progress.
+- **Daily Habit Tracking** — Track the completion of daily habits or personal goals.
+- **Custom Task Editing** — Edit the titles and descriptions of the three tasks in the “Three Things I Want to Implement” section.
+- **Monthly Overview** — Review task progress throughout the month.
+- **Weekly Snapshot** — View weekly completion and progress.
 - **Progress Monitoring** — Track completion rates and consistency.
-- **Habit Reflections** — Record personal thoughts and reflections.
+- **Learning & Reflection Sections** — Record key lessons, personal thoughts, and reflections.
 - **Local Data Storage** — Save supported tracking data in the browser using `localStorage`.
 - **CSV Export** — Export supported tracking data for further use.
 - **Responsive Interface** — Designed to work across different screen sizes.
 
 ## 🛠️ Technology Stack
 
-| Technology | Purpose |
-|---|---|
-| HTML5 | Page structure |
-| Tailwind CSS | Styling |
-| CSS3 | Custom styling and layout |
-| JavaScript | Application logic and interactions |
-| Browser localStorage | Client-side data persistence |
+| **Technology**       | **Purpose**                         |
+| -------------------- | ----------------------------------- |
+| HTML5                | Page structure                      |
+| Tailwind CSS         | Utility-first styling support       |
+| CSS3                 | Custom styling and layout           |
+| JavaScript           | Application logic and interactions  |
+| Browser localStorage | Client-side data persistence        |
 
 ## 📂 Project Structure
 
@@ -48,7 +49,7 @@ Tracker/
 The application uses browser `localStorage` for supported data persistence.
 
 - Data is stored locally in the browser.
-- Data is not automatically synchronized across devices.
+- Saved data is not automatically synchronized across devices.
 - Clearing browser site data may remove saved information.
 - The application does not currently provide user authentication or cloud-based storage.
 
@@ -56,7 +57,6 @@ The application uses browser `localStorage` for supported data persistence.
 
 Potential enhancements include:
 
-- Custom habit creation and editing
 - Habit streak tracking
 - Enhanced progress charts
 - Theme customization
