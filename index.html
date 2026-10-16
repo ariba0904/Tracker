@@ -83,6 +83,29 @@ input[type=text],textarea{border:1px solid var(--line);border-radius:7px;padding
 .reflection textarea{width:100%;min-height:95px;resize:vertical;background:#fff}
 .footer{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:16px;color:var(--muted);font-size:11px}
 
+.learning-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.learning-item{display:flex;gap:10px;align-items:flex-start;border:1px solid var(--line);border-radius:11px;padding:12px;background:#fff9fb}
+.learning-number{display:grid;place-items:center;flex:0 0 27px;height:27px;border-radius:8px;background:var(--pink2);color:var(--plum);font-weight:bold}
+.task-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.task-card{border:1px solid var(--line);border-radius:13px;padding:15px;background:linear-gradient(145deg,#fff,#fff8fa)}
+.task-card .task-label{font-size:10px;font-weight:bold;letter-spacing:1px;color:#a85d78}
+.task-card h3{font-size:15px;color:var(--plum);margin:7px 0}
+.task-card p{font-size:12px;color:var(--muted);margin:0;line-height:1.6}
+.task-section-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.task-edit-toggle{border:1px solid #e8b7c9;background:#fff5f8;color:#8d4561;border-radius:9px;padding:8px 12px;font-weight:700;cursor:pointer;font-size:12px}
+.task-editor{display:none;margin:12px 0 18px;padding:16px;border:1px solid var(--line);border-radius:14px;background:#fffafd}
+.task-editor.open{display:grid;gap:12px}
+.task-edit-field{display:grid;gap:5px}
+.task-edit-field label{font-size:12px;font-weight:700;color:var(--plum)}
+.task-edit-field input,.task-edit-field textarea{width:100%;border:1px solid #e6cbd5;border-radius:8px;padding:10px;font:inherit;font-size:13px;background:#fff}
+.task-edit-field textarea{min-height:65px;resize:vertical}
+.task-editor-actions{display:flex;gap:8px;flex-wrap:wrap}
+.task-editor-actions button{border:0;border-radius:8px;padding:9px 13px;cursor:pointer;font-weight:700}
+.task-save{background:var(--plum);color:white}
+.task-cancel{background:#f7eaf0;color:var(--plum)}
+@media(max-width:800px){.learning-grid,.task-grid{grid-template-columns:1fr}}
+
+
 @media(max-width:800px){
     body{padding:8px}
     .sheet{padding:13px}
@@ -116,6 +139,30 @@ input[type=text],textarea{border:1px solid var(--line);border-radius:7px;padding
         <button class="primary" id="export">Export CSV</button>
     </div>
 </header>
+
+<h2 class="section-title">Five Things I Learned from <em>Deep Work</em></h2>
+<section class="learning-grid" aria-label="Five key lessons from Deep Work">
+    <article class="learning-item"><span class="learning-number">1</span><div><strong>Deep work creates valuable results.</strong><div class="sub">Focused, uninterrupted effort helps me learn challenging skills and produce higher-quality work.</div></div></article>
+    <article class="learning-item"><span class="learning-number">2</span><div><strong>Shallow work can feel productive.</strong><div class="sub">Messages, notifications, and low-value tasks can crowd out meaningful work.</div></div></article>
+    <article class="learning-item"><span class="learning-number">3</span><div><strong>Focus improves through practice.</strong><div class="sub">Concentration grows when I train regularly and resist unnecessary distractions.</div></div></article>
+    <article class="learning-item"><span class="learning-number">4</span><div><strong>Structure makes focus easier.</strong><div class="sub">Scheduling focus blocks and preparing my workspace makes deep work repeatable.</div></div></article>
+    <article class="learning-item"><span class="learning-number">5</span><div><strong>Review progress and rest deliberately.</strong><div class="sub">A weekly review and a clear shutdown routine help protect tomorrow’s focus.</div></div></article>
+</section>
+
+<div class="task-section-heading">
+    <h2 class="section-title">Three Things I Want to Implement</h2>
+    <button type="button" class="task-edit-toggle" id="editTasksToggle">✎ Edit these tasks</button>
+</div>
+<div class="task-editor" id="taskEditor" aria-label="Edit implementation tasks">
+    <div class="task-edit-field"><label for="taskTitle1">Task 1 title</label><input id="taskTitle1" maxlength="90"></div>
+    <div class="task-edit-field"><label for="taskDesc1">Task 1 description</label><textarea id="taskDesc1" maxlength="350"></textarea></div>
+    <div class="task-edit-field"><label for="taskTitle2">Task 2 title</label><input id="taskTitle2" maxlength="90"></div>
+    <div class="task-edit-field"><label for="taskDesc2">Task 2 description</label><textarea id="taskDesc2" maxlength="350"></textarea></div>
+    <div class="task-edit-field"><label for="taskTitle3">Task 3 title</label><input id="taskTitle3" maxlength="90"></div>
+    <div class="task-edit-field"><label for="taskDesc3">Task 3 description</label><textarea id="taskDesc3" maxlength="350"></textarea></div>
+    <div class="task-editor-actions"><button type="button" class="task-save" id="saveTasks">Save changes</button><button type="button" class="task-cancel" id="cancelTaskEdit">Cancel</button></div>
+</div>
+<section class="task-grid" id="taskCards" aria-label="Three habits to implement"></section>
 
 <h2 class="section-title">Monthly Overview</h2>
 
@@ -193,13 +240,22 @@ input[type=text],textarea{border:1px solid var(--line);border-radius:7px;padding
 
 <script>
 const defaultHabits = [
-    ["Deep work / focused study", "One distraction-free focus session"],
-    ["Pray on time", "Make space for salah"],
-    ["Read / learn", "A little learning every day"],
-    ["Move my body", "Walk, stretch, or exercise"],
-    ["Drink enough water", "Care for my body"],
-    ["Sleep on time", "Protect my rest"]
+    ["Daily deep-work session", "Complete one focused 45-minute session on my highest-priority study or skill-building task."],
+    ["Control digital distractions", "Silence notifications, put my phone out of reach, and check social media only during planned breaks."],
+    ["Plan and review", "Write today's priority before starting, then spend five minutes reviewing progress and planning tomorrow."]
 ];
+
+const taskSettingsKey = 'habitTrackerPink:taskSettings';
+function getTaskSettings() {
+    try {
+        const saved = JSON.parse(localStorage.getItem(taskSettingsKey));
+        if (Array.isArray(saved) && saved.length === 3 && saved.every(x => x && typeof x.name === 'string' && typeof x.note === 'string')) {
+            return saved.map(x => [x.name, x.note]);
+        }
+    } catch (e) {}
+    return defaultHabits.map(x => [...x]);
+}
+let currentTaskSettings = getTaskSettings();
 
 const monthInput = document.getElementById('month');
 const now = new Date();
@@ -215,9 +271,9 @@ function blankData(m) {
     let n = new Date(+m.slice(0,4), +m.slice(5,7), 0).getDate();
 
     return {
-        habits: defaultHabits.map(x => ({name:x[0], note:x[1]})),
+        habits: getTaskSettings().map(x => ({name:x[0], note:x[1]})),
         checks: Array.from({length:n}, () =>
-            Array(defaultHabits.length).fill(false)
+            Array(getTaskSettings().length).fill(false)
         ),
         reflection:'',
         gratitude:''
@@ -235,18 +291,24 @@ function load(m) {
 
     if (!d) d = blankData(m);
 
-    d.habits = d.habits || defaultHabits.map(x => ({
-        name:x[0],
-        note:x[1]
-    }));
+    const expectedHabits = getTaskSettings().map(x => ({name:x[0], note:x[1]}));
+    const hasCurrentTasks = Array.isArray(d.habits) &&
+        d.habits.length === expectedHabits.length &&
+        expectedHabits.every((habit, i) => d.habits[i] && d.habits[i].name === habit.name);
 
-    d.checks = d.checks || [];
-
-    d.checks = Array.from({length:n}, (_,i) =>
-        Array.from({length:d.habits.length}, (_,j) =>
-            !!(d.checks[i] && d.checks[i][j])
-        )
-    );
+    // If this browser has the older six-habit version, start this month with the three Deep Work tasks.
+    // Reflections are preserved; old checkmarks are not mapped to different tasks.
+    if (!hasCurrentTasks) {
+        d.habits = expectedHabits;
+        d.checks = Array.from({length:n}, () => Array(expectedHabits.length).fill(false));
+    } else {
+        d.checks = d.checks || [];
+        d.checks = Array.from({length:n}, (_,i) =>
+            Array.from({length:expectedHabits.length}, (_,j) =>
+                !!(d.checks[i] && d.checks[i][j])
+            )
+        );
+    }
 
     d.reflection = d.reflection || '';
     d.gratitude = d.gratitude || '';
@@ -648,6 +710,49 @@ document.getElementById('export').onclick = () => {
     URL.revokeObjectURL(a.href);
 };
 
+function renderTaskCards() {
+    const container = document.getElementById('taskCards');
+    container.innerHTML = currentTaskSettings.map((task, i) => `
+        <article class="task-card"><div class="task-label">TASK ${i + 1}</div><h3></h3><p></p></article>
+    `).join('');
+    [...container.querySelectorAll('.task-card')].forEach((card, i) => {
+        card.querySelector('h3').textContent = currentTaskSettings[i][0];
+        card.querySelector('p').textContent = currentTaskSettings[i][1];
+    });
+}
+function fillTaskEditor() {
+    currentTaskSettings.forEach((task, i) => {
+        document.getElementById(`taskTitle${i+1}`).value = task[0];
+        document.getElementById(`taskDesc${i+1}`).value = task[1];
+    });
+}
+document.getElementById('editTasksToggle').onclick = () => {
+    fillTaskEditor();
+    document.getElementById('taskEditor').classList.toggle('open');
+};
+document.getElementById('cancelTaskEdit').onclick = () => {
+    document.getElementById('taskEditor').classList.remove('open');
+};
+document.getElementById('saveTasks').onclick = () => {
+    const updated = [1,2,3].map(i => [
+        document.getElementById(`taskTitle${i}`).value.trim(),
+        document.getElementById(`taskDesc${i}`).value.trim()
+    ]);
+    if (updated.some(task => !task[0] || !task[1])) {
+        alert('Please fill in all three task titles and descriptions.');
+        return;
+    }
+    currentTaskSettings = updated;
+    localStorage.setItem(taskSettingsKey, JSON.stringify(updated.map(x => ({name:x[0], note:x[1]}))));
+    data.habits = updated.map(x => ({name:x[0], note:x[1]}));
+    data.checks = data.checks.map(day => updated.map((_, i) => !!day[i]));
+    save();
+    renderTaskCards();
+    renderAll();
+    document.getElementById('taskEditor').classList.remove('open');
+};
+
+renderTaskCards();
 renderAll();
 </script>
 </body>
