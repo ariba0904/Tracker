@@ -1,16 +1,23 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>My Habit Tracker</title>
+
 <style>
 :root{--pink:#e8a1b5;--pink2:#f7dce4;--pink3:#fff4f7;--plum:#79536a;--ink:#42343c;--muted:#8d7a83;--line:#eed7df;--white:#fff;--lav:#e9e0f5}
-*{box-sizing:border-box}body{margin:0;background:#fff9fb;color:var(--ink);font-family:Arial,Helvetica,sans-serif;padding:22px}
+*{box-sizing:border-box}
+body{margin:0;background:#fff9fb;color:var(--ink);font-family:Arial,Helvetica,sans-serif;padding:22px}
 .sheet{max-width:1200px;margin:auto;background:#fff;border:1px solid #f1dfe5;box-shadow:0 12px 35px #6b35420e;padding:22px;border-radius:18px}
 .top{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;border-bottom:2px solid var(--pink2);padding-bottom:18px}
-h1{font-family:Georgia,serif;font-size:clamp(25px,4vw,38px);margin:0;color:#a85d78;font-weight:600}.sub{margin:7px 0 0;color:var(--muted);font-size:13px}
-.controls{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.controls button,.controls select,.controls input{border:1px solid var(--line);background:white;color:var(--ink);padding:9px 12px;border-radius:9px;font-size:13px}.controls button{cursor:pointer}.controls button.primary{background:var(--pink);color:#fff;border-color:var(--pink);font-weight:bold}
+h1{font-family:Georgia,serif;font-size:clamp(25px,4vw,38px);margin:0;color:#a85d78;font-weight:600}
+.sub{margin:7px 0 0;color:var(--muted);font-size:13px}
+.controls{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.controls button,.controls select,.controls input{border:1px solid var(--line);background:white;color:var(--ink);padding:9px 12px;border-radius:9px;font-size:13px}
+.controls button{cursor:pointer}
+.controls button.primary{background:var(--pink);color:#fff;border-color:var(--pink);font-weight:bold}
 .section-title{font-family:Georgia,serif;font-size:20px;color:#a85d78;margin:22px 0 12px}
 .dashboard{display:grid;grid-template-columns:1.35fr 1fr 1fr;gap:12px}
 .panel{border:1px solid var(--line);border-radius:13px;padding:15px;background:linear-gradient(145deg,#fff,#fff8fa);min-width:0}
@@ -23,110 +30,622 @@ h1{font-family:Georgia,serif;font-size:clamp(25px,4vw,38px);margin:0;color:#a85d
 .donut{width:112px;height:112px;border-radius:50%;display:grid;place-items:center;position:relative;background:conic-gradient(var(--pink) 0%,#f4e6eb 0)}
 .donut:after{content:"";position:absolute;width:82px;height:82px;border-radius:50%;background:white}
 .donut strong{position:relative;z-index:1;font-size:23px;color:#a85d78}
-.legend{font-size:12px;color:var(--muted);line-height:1.9}.legend b{color:var(--ink)}
+.legend{font-size:12px;color:var(--muted);line-height:1.9}
+.legend b{color:var(--ink)}
 .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:13px}
-.stat{background:var(--pink3);border-radius:9px;text-align:center;padding:10px 4px}.stat b{display:block;color:#a85d78;font-size:19px}.stat span{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
+.stat{background:var(--pink3);border-radius:9px;text-align:center;padding:10px 4px}
+.stat b{display:block;color:#a85d78;font-size:19px}
+.stat span{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
 .table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px}
 table{width:100%;border-collapse:collapse;min-width:700px;font-size:12px}
 th{background:#f4dbe3;color:#75495d;font-size:11px;text-transform:uppercase;letter-spacing:.4px;padding:11px 8px}
 td{padding:9px 8px;border-bottom:1px solid #f4e5ea;text-align:center}
-tr:last-child td{border-bottom:0}tbody tr:nth-child(even){background:#fff9fb}
+tr:last-child td{border-bottom:0}
+tbody tr:nth-child(even){background:#fff9fb}
 td:first-child,th:first-child{text-align:left;padding-left:13px}
-.habit-name{font-weight:600;color:#604553}.habit-note{display:block;font-size:10px;color:#a08c95;margin-top:3px;font-weight:normal}
+.habit-name{font-weight:600;color:#604553}
+.habit-note{display:block;font-size:10px;color:#a08c95;margin-top:3px;font-weight:normal}
 input[type=checkbox]{accent-color:#d77f9c;width:17px;height:17px;cursor:pointer;vertical-align:middle}
 input[type=text],textarea{border:1px solid var(--line);border-radius:7px;padding:8px;color:var(--ink);font:inherit;background:#fff;max-width:100%}
-.habit-input{width:100%;min-width:115px}.small-input{width:70px}.progress-cell{min-width:115px}
-.progress-track{height:7px;border-radius:10px;background:#f3e5eb;overflow:hidden;margin-bottom:4px}.progress-fill{height:100%;background:#d985a1;border-radius:10px;width:0}
+.habit-input{width:100%;min-width:115px}
+.small-input{width:70px}
+.progress-cell{min-width:115px}
+.progress-track{height:7px;border-radius:10px;background:#f3e5eb;overflow:hidden;margin-bottom:4px}
+.progress-fill{height:100%;background:#d985a1;border-radius:10px;width:0}
 .progress-text{font-size:11px;color:#a85d78;font-weight:bold}
-.week-grid{display:grid;grid-template-columns:repeat(7,minmax(120px,1fr));gap:9px;overflow-x:auto;padding-bottom:5px}
+
+/* Weekly Snapshot */
+.week-grid{
+    display:grid;
+    grid-template-columns:repeat(7,minmax(120px,1fr));
+    gap:9px;
+    overflow-x:auto;
+    padding-bottom:5px;
+    align-items:stretch;
+}
 .day-card{border:1px solid var(--line);border-radius:12px;overflow:hidden;min-width:120px;background:#fff}
-.day-head{background:#f3d9e2;padding:10px;text-align:center}.day-head b{display:block;font-size:12px;color:#74495d}.day-head span{font-size:10px;color:#9b7182}
-.day-content{padding:10px}.day-pct{text-align:center;font-size:18px;font-weight:bold;color:#b96b87;margin:6px 0}
-.mini-ring{width:55px;height:55px;border-radius:50%;margin:0 auto 8px;display:grid;place-items:center;background:conic-gradient(var(--pink) 0%,#f4e6eb 0);position:relative}.mini-ring:after{content:"";position:absolute;background:#fff;width:42px;height:42px;border-radius:50%}.mini-ring span{position:relative;z-index:1;font-size:10px;font-weight:bold}
-.day-task{font-size:10px;color:#796671;display:flex;gap:5px;align-items:flex-start;margin:7px 0;line-height:1.3}.day-task input{width:13px;height:13px;flex-shrink:0}
-.reflections{display:grid;grid-template-columns:1fr 1fr;gap:12px}.reflection{border:1px solid var(--line);border-radius:12px;padding:14px;background:#fff9fb}.reflection label{display:block;color:#9f5d77;font-size:12px;font-weight:bold;margin-bottom:8px}.reflection textarea{width:100%;min-height:95px;resize:vertical;background:#fff}
+.day-head{background:#f3d9e2;padding:10px;text-align:center}
+.day-head b{display:block;font-size:12px;color:#74495d}
+.day-head span{font-size:10px;color:#9b7182}
+.day-content{padding:10px}
+.day-pct{text-align:center;font-size:18px;font-weight:bold;color:#b96b87;margin:6px 0}
+.mini-ring{width:55px;height:55px;border-radius:50%;margin:0 auto 8px;display:grid;place-items:center;background:conic-gradient(var(--pink) 0%,#f4e6eb 0);position:relative}
+.mini-ring:after{content:"";position:absolute;background:#fff;width:42px;height:42px;border-radius:50%}
+.mini-ring span{position:relative;z-index:1;font-size:10px;font-weight:bold}
+.day-task{font-size:10px;color:#796671;display:flex;gap:5px;align-items:flex-start;margin:7px 0;line-height:1.3;overflow-wrap:anywhere}
+.day-task input{width:13px;height:13px;flex-shrink:0;margin:0}
+
+.reflections{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.reflection{border:1px solid var(--line);border-radius:12px;padding:14px;background:#fff9fb}
+.reflection label{display:block;color:#9f5d77;font-size:12px;font-weight:bold;margin-bottom:8px}
+.reflection textarea{width:100%;min-height:95px;resize:vertical;background:#fff}
 .footer{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:16px;color:var(--muted);font-size:11px}
-@media(max-width:800px){body{padding:8px}.sheet{padding:13px}.dashboard{grid-template-columns:1fr}.reflections{grid-template-columns:1fr}.week-grid{grid-template-columns:repeat(7,120px)}}
-@media print{body{padding:0;background:#fff}.sheet{box-shadow:none;border:0}.controls,.footer button{display:none}.panel,.day-card,.reflection{break-inside:avoid}}
+
+@media(max-width:800px){
+    body{padding:8px}
+    .sheet{padding:13px}
+    .dashboard{grid-template-columns:1fr}
+    .reflections{grid-template-columns:1fr}
+    .week-grid{grid-template-columns:repeat(7,120px)}
+}
+@media print{
+    body{padding:0;background:#fff}
+    .sheet{box-shadow:none;border:0}
+    .controls,.footer button{display:none}
+    .panel,.day-card,.reflection{break-inside:avoid}
+}
 </style>
 </head>
+
 <body>
 <main class="sheet">
+
 <header class="top">
-<div><h1>My Habit Tracker</h1><p class="sub">Small steps every day become a life you are proud of. ♡</p></div>
-<div class="controls">
-<button id="prev">←</button><input id="month" type="month" aria-label="Select month"><button id="next">→</button>
-<button id="today">Current month</button><button class="primary" id="export">Export CSV</button>
-</div>
+    <div>
+        <h1>My Habit Tracker</h1>
+        <p class="sub">Small steps every day become a life you are proud of. ♡</p>
+    </div>
+
+    <div class="controls">
+        <button id="prev">←</button>
+        <input id="month" type="month" aria-label="Select month">
+        <button id="next">→</button>
+        <button id="today">Current month</button>
+        <button class="primary" id="export">Export CSV</button>
+    </div>
 </header>
+
 <h2 class="section-title">Monthly Overview</h2>
+
 <section class="dashboard">
-<div class="panel"><h3>Daily completion</h3><div class="chart" id="chart"></div></div>
-<div class="panel"><h3>Overall progress</h3><div class="donut-row"><div class="donut" id="overallDonut"><strong id="overallPct">0%</strong></div><div class="legend"><div>Completed <b id="doneCount">0</b></div><div>Remaining <b id="leftCount">0</b></div><div>Days in month <b id="daysCount">30</b></div></div></div></div>
-<div class="panel"><h3>Monthly summary</h3><div class="stats"><div class="stat"><b id="bestDay">—</b><span>Best day</span></div><div class="stat"><b id="streak">0</b><span>Perfect days</span></div><div class="stat"><b id="activeDays">0</b><span>Active days</span></div></div><p style="font-size:11px;color:var(--muted);line-height:1.6;margin-bottom:0">Check off each habit as you complete it. Your charts and percentages update automatically.</p></div>
+    <div class="panel">
+        <h3>Daily completion</h3>
+        <div class="chart" id="chart"></div>
+    </div>
+
+    <div class="panel">
+        <h3>Overall progress</h3>
+        <div class="donut-row">
+            <div class="donut" id="overallDonut">
+                <strong id="overallPct">0%</strong>
+            </div>
+            <div class="legend">
+                <div>Completed <b id="doneCount">0</b></div>
+                <div>Remaining <b id="leftCount">0</b></div>
+                <div>Days in month <b id="daysCount">30</b></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel">
+        <h3>Monthly summary</h3>
+        <div class="stats">
+            <div class="stat"><b id="bestDay">—</b><span>Best day</span></div>
+            <div class="stat"><b id="streak">0</b><span>Perfect days</span></div>
+            <div class="stat"><b id="activeDays">0</b><span>Active days</span></div>
+        </div>
+        <p style="font-size:11px;color:var(--muted);line-height:1.6;margin-bottom:0">
+            Check off each habit as you complete it. Your charts and percentages update automatically.
+        </p>
+    </div>
 </section>
-<h2 class="section-title">Habit Tracker <span id="monthLabel" style="font:12px Arial;color:#a48c96"></span></h2>
-<div class="table-wrap"><table><thead id="head"></thead><tbody id="body"></tbody></table></div>
+
+<h2 class="section-title">
+    Habit Tracker
+    <span id="monthLabel" style="font:12px Arial;color:#a48c96"></span>
+</h2>
+
+<div class="table-wrap">
+    <table>
+        <thead id="head"></thead>
+        <tbody id="body"></tbody>
+    </table>
+</div>
+
 <h2 class="section-title">Weekly Snapshot</h2>
 <div class="week-grid" id="weekGrid"></div>
+
 <h2 class="section-title">My Reflections</h2>
+
 <section class="reflections">
-<div class="reflection"><label for="reflection">MONTHLY REFLECTION</label><textarea id="reflection" placeholder="What went well this month? What would I like to improve?"></textarea></div>
-<div class="reflection"><label for="gratitude">THINGS I'M PROUD OF</label><textarea id="gratitude" placeholder="Write down your small wins, progress, and moments you are proud of..."></textarea></div>
+    <div class="reflection">
+        <label for="reflection">MONTHLY REFLECTION</label>
+        <textarea id="reflection" placeholder="What went well this month? What would I like to improve?"></textarea>
+    </div>
+
+    <div class="reflection">
+        <label for="gratitude">THINGS I'M PROUD OF</label>
+        <textarea id="gratitude" placeholder="Write down your small wins, progress, and moments you are proud of..."></textarea>
+    </div>
 </section>
-<div class="footer"><span>Your progress is personal. Keep showing up for yourself. ♡</span><div><button id="clear">Reset this month</button> <button onclick="window.print()">Print</button></div></div>
+
+<div class="footer">
+    <span>Your progress is personal. Keep showing up for yourself. ♡</span>
+    <div>
+        <button id="clear">Reset this month</button>
+        <button onclick="window.print()">Print</button>
+    </div>
+</div>
+
 </main>
+
 <script>
-const defaultHabits=[
-["Deep work / focused study","One distraction-free focus session"],
-["Pray on time","Make space for salah"],
-["Read / learn","A little learning every day"],
-["Move my body","Walk, stretch, or exercise"],
-["Drink enough water","Care for my body"],
-["Sleep on time","Protect my rest"]
+const defaultHabits = [
+    ["Deep work / focused study", "One distraction-free focus session"],
+    ["Pray on time", "Make space for salah"],
+    ["Read / learn", "A little learning every day"],
+    ["Move my body", "Walk, stretch, or exercise"],
+    ["Drink enough water", "Care for my body"],
+    ["Sleep on time", "Protect my rest"]
 ];
-const monthInput=document.getElementById('month');
-const now=new Date();monthInput.value=`${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}`;
-let monthKey=monthInput.value;
-const key=(m)=>'habitTrackerPink:'+m;
-function blankData(m){let n=new Date(+m.slice(0,4),+m.slice(5,7),0).getDate();return {habits:defaultHabits.map(x=>({name:x[0],note:x[1]})),checks:Array.from({length:n},()=>Array(defaultHabits.length).fill(false)),reflection:'',gratitude:''}}
-function load(m){let d;try{d=JSON.parse(localStorage.getItem(key(m)))}catch(e){}let n=new Date(+m.slice(0,4),+m.slice(5,7),0).getDate();if(!d)d=blankData(m);d.habits=d.habits||defaultHabits.map(x=>({name:x[0],note:x[1]}));d.checks=d.checks||[];d.checks=Array.from({length:n},(_,i)=>Array.from({length:d.habits.length},(_,j)=>!!(d.checks[i]&&d.checks[i][j])));d.reflection=d.reflection||'';d.gratitude=d.gratitude||'';return d}
-let data=load(monthKey);
-function save(){localStorage.setItem(key(monthKey),JSON.stringify(data))}
-function monthName(m){return new Date(+m.slice(0,4),+m.slice(5,7)-1,1).toLocaleDateString(undefined,{month:'long',year:'numeric'})}
-function dayPct(i){let row=data.checks[i]||[];return row.length?Math.round(row.filter(Boolean).length/row.length*100):0}
-function updateStats(){
- const n=data.checks.length,h=data.habits.length,total=n*h,done=data.checks.reduce((s,r)=>s+r.filter(Boolean).length,0),pct=total?Math.round(done/total*100):0;
- document.getElementById('overallPct').textContent=pct+'%';document.getElementById('overallDonut').style.background=`conic-gradient(var(--pink) ${pct}%,#f4e6eb 0)`;
- document.getElementById('doneCount').textContent=done;document.getElementById('leftCount').textContent=total-done;document.getElementById('daysCount').textContent=n;document.getElementById('monthLabel').textContent='— '+monthName(monthKey);
- document.getElementById('activeDays').textContent=data.checks.filter(r=>r.some(Boolean)).length;
- document.getElementById('streak').textContent=data.checks.filter(r=>r.length&&r.every(Boolean)).length;
- let best=-1,bi=-1;data.checks.forEach((r,i)=>{let p=dayPct(i);if(p>best){best=p;bi=i}});document.getElementById('bestDay').textContent=best>0?`${bi+1} (${best}%)`:'—';
- let chart=document.getElementById('chart');chart.innerHTML='';data.checks.forEach((r,i)=>{let w=document.createElement('div');w.className='bar-wrap';let b=document.createElement('div');b.className='bar';b.style.height=Math.max(3,dayPct(i)*1.15)+'px';b.title=`Day ${i+1}: ${dayPct(i)}%`;let s=document.createElement('span');s.textContent=(i%5===0||i===n-1)?i+1:'';w.append(b,s);chart.append(w)});
+
+const monthInput = document.getElementById('month');
+const now = new Date();
+
+monthInput.value =
+    `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}`;
+
+let monthKey = monthInput.value;
+
+const key = m => 'habitTrackerPink:' + m;
+
+function blankData(m) {
+    let n = new Date(+m.slice(0,4), +m.slice(5,7), 0).getDate();
+
+    return {
+        habits: defaultHabits.map(x => ({name:x[0], note:x[1]})),
+        checks: Array.from({length:n}, () =>
+            Array(defaultHabits.length).fill(false)
+        ),
+        reflection:'',
+        gratitude:''
+    };
 }
-function renderTable(){
- const n=data.checks.length,h=data.habits.length;let head=document.getElementById('head');head.innerHTML='<tr><th style="min-width:200px">Habit / routine</th>'+Array.from({length:n},(_,i)=>`<th>${i+1}<br><span style="font-size:9px;font-weight:normal">${new Date(+monthKey.slice(0,4),+monthKey.slice(5,7)-1,i+1).toLocaleDateString(undefined,{weekday:'short'}).slice(0,2)}</span></th>`).join('')+'<th>Progress</th></tr>';
- let body=document.getElementById('body');body.innerHTML='';
- data.habits.forEach((habit,j)=>{let tr=document.createElement('tr');let first=document.createElement('td');let inp=document.createElement('input');inp.type='text';inp.className='habit-input';inp.value=habit.name;inp.setAttribute('aria-label','Habit name');inp.onchange=()=>{habit.name=inp.value;save();renderWeekly();};let note=document.createElement('input');note.type='text';note.className='habit-input';note.style.marginTop='4px';note.style.fontSize='10px';note.value=habit.note||'';note.placeholder='Short reminder';note.onchange=()=>{habit.note=note.value;save()};first.append(inp,note);tr.append(first);
- data.checks.forEach((row,i)=>{let td=document.createElement('td'),cb=document.createElement('input');cb.type='checkbox';cb.checked=!!row[j];cb.setAttribute('aria-label',`${habit.name}, day ${i+1}`);cb.onchange=()=>{data.checks[i][j]=cb.checked;save();updateStats();renderWeekly()};td.append(cb);tr.append(td)});
- let td=document.createElement('td');td.className='progress-cell';let val=data.checks.filter(r=>r[j]).length,per=Math.round(val/n*100);td.innerHTML=`<div class="progress-track"><div class="progress-fill" style="width:${per}%"></div></div><span class="progress-text">${per}% · ${val}/${n}</span>`;tr.append(td);body.append(tr)});
- let tr=document.createElement('tr');tr.style.background='#fff1f5';let td=document.createElement('td');td.innerHTML='<b>Daily completion</b>';tr.append(td);data.checks.forEach((r,i)=>{let c=document.createElement('td');c.innerHTML=`<b style="color:#a85d78">${dayPct(i)}%</b>`;tr.append(c)});let end=document.createElement('td');end.innerHTML=`<b style="color:#a85d78">${Math.round(data.checks.flat().filter(Boolean).length/(n*h)*100)}%</b>`;tr.append(end);body.append(tr)
+
+function load(m) {
+    let d;
+
+    try {
+        d = JSON.parse(localStorage.getItem(key(m)));
+    } catch(e) {}
+
+    let n = new Date(+m.slice(0,4), +m.slice(5,7), 0).getDate();
+
+    if (!d) d = blankData(m);
+
+    d.habits = d.habits || defaultHabits.map(x => ({
+        name:x[0],
+        note:x[1]
+    }));
+
+    d.checks = d.checks || [];
+
+    d.checks = Array.from({length:n}, (_,i) =>
+        Array.from({length:d.habits.length}, (_,j) =>
+            !!(d.checks[i] && d.checks[i][j])
+        )
+    );
+
+    d.reflection = d.reflection || '';
+    d.gratitude = d.gratitude || '';
+
+    return d;
 }
-function renderWeekly(){
- let el=document.getElementById('weekGrid');el.innerHTML='';for(let start=0;start<data.checks.length;start+=Math.ceil(data.checks.length/7)){let end=Math.min(start+Math.ceil(data.checks.length/7),data.checks.length);let card=document.createElement('div');card.className='day-card';let pct=Math.round(data.checks.slice(start,end).flat().filter(Boolean).length/((end-start)*data.habits.length)*100);card.innerHTML=`<div class="day-head"><b>${start+1} – ${end}</b><span>${monthName(monthKey)}</span></div><div class="day-content"><div class="mini-ring" style="background:conic-gradient(var(--pink) ${pct}%,#f4e6eb 0)"><span>${pct}%</span></div><div style="text-align:center;font-size:10px;color:#9a8790">weekly completion</div>${data.habits.slice(0,4).map((h,j)=>`<label class="day-task"><input type="checkbox" data-day="${start}" data-habit="${j}" ${data.checks.slice(start,end).every(r=>r[j])?'checked':''}>${escapeHtml(h.name)}</label>`).join('')}</div>`;el.append(card)}
- el.querySelectorAll('input[type=checkbox]').forEach(cb=>cb.onchange=()=>{let day=+cb.dataset.day,j=+cb.dataset.habit;for(let i=day;i<Math.min(day+Math.ceil(data.checks.length/7),data.checks.length);i++)data.checks[i][j]=cb.checked;save();renderAll()})
+
+let data = load(monthKey);
+
+function save() {
+    localStorage.setItem(key(monthKey), JSON.stringify(data));
 }
-function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-function renderAll(){renderTable();updateStats();renderWeekly();document.getElementById('reflection').value=data.reflection;document.getElementById('gratitude').value=data.gratitude}
-function switchMonth(m){if(!m)return;save();monthKey=m;data=load(m);monthInput.value=m;renderAll()}
-monthInput.onchange=()=>switchMonth(monthInput.value);
-document.getElementById('prev').onclick=()=>{let d=new Date(+monthKey.slice(0,4),+monthKey.slice(5,7)-2,1);switchMonth(`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`)};
-document.getElementById('next').onclick=()=>{let d=new Date(+monthKey.slice(0,4),+monthKey.slice(5,7),1);switchMonth(`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`)};
-document.getElementById('today').onclick=()=>switchMonth(`${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}`);
-document.getElementById('reflection').oninput=e=>{data.reflection=e.target.value;save()};
-document.getElementById('gratitude').oninput=e=>{data.gratitude=e.target.value;save()};
-document.getElementById('clear').onclick=()=>{if(confirm('Reset all checkboxes for '+monthName(monthKey)+'?')){data.checks=data.checks.map(()=>data.habits.map(()=>false));save();renderAll()}};
-document.getElementById('export').onclick=()=>{let rows=[['Habit',...data.checks.map((_,i)=>i+1),'Completion'],...data.habits.map((h,j)=>[h.name,...data.checks.map(r=>r[j]?'Done':'Not done'),Math.round(data.checks.filter(r=>r[j]).length/data.checks.length*100)+'%']),['Daily completion',...data.checks.map((r,i)=>dayPct(i)+'%'),'']];let csv=rows.map(r=>r.map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(',')).join('\r\n');let a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));a.download='habit-tracker-'+monthKey+'.csv';a.click();URL.revokeObjectURL(a.href)};
+
+function monthName(m) {
+    return new Date(
+        +m.slice(0,4),
+        +m.slice(5,7)-1,
+        1
+    ).toLocaleDateString(undefined, {
+        month:'long',
+        year:'numeric'
+    });
+}
+
+function dayPct(i) {
+    let row = data.checks[i] || [];
+    return row.length
+        ? Math.round(row.filter(Boolean).length / row.length * 100)
+        : 0;
+}
+
+function updateStats() {
+    const n = data.checks.length;
+    const h = data.habits.length;
+    const total = n * h;
+
+    const done = data.checks.reduce(
+        (s,r) => s + r.filter(Boolean).length, 0
+    );
+
+    const pct = total ? Math.round(done / total * 100) : 0;
+
+    document.getElementById('overallPct').textContent = pct + '%';
+
+    document.getElementById('overallDonut').style.background =
+        `conic-gradient(var(--pink) ${pct}%,#f4e6eb 0)`;
+
+    document.getElementById('doneCount').textContent = done;
+    document.getElementById('leftCount').textContent = total - done;
+    document.getElementById('daysCount').textContent = n;
+
+    document.getElementById('monthLabel').textContent =
+        '— ' + monthName(monthKey);
+
+    document.getElementById('activeDays').textContent =
+        data.checks.filter(r => r.some(Boolean)).length;
+
+    document.getElementById('streak').textContent =
+        data.checks.filter(r => r.length && r.every(Boolean)).length;
+
+    let best = -1, bi = -1;
+
+    data.checks.forEach((r,i) => {
+        let p = dayPct(i);
+
+        if (p > best) {
+            best = p;
+            bi = i;
+        }
+    });
+
+    document.getElementById('bestDay').textContent =
+        best > 0 ? `${bi+1} (${best}%)` : '—';
+
+    let chart = document.getElementById('chart');
+    chart.innerHTML = '';
+
+    data.checks.forEach((r,i) => {
+        let w = document.createElement('div');
+        w.className = 'bar-wrap';
+
+        let b = document.createElement('div');
+        b.className = 'bar';
+        b.style.height = Math.max(3, dayPct(i) * 1.15) + 'px';
+        b.title = `Day ${i+1}: ${dayPct(i)}%`;
+
+        let s = document.createElement('span');
+        s.textContent = (i % 5 === 0 || i === n-1) ? i+1 : '';
+
+        w.append(b,s);
+        chart.append(w);
+    });
+}
+
+function renderTable() {
+    const n = data.checks.length;
+    const h = data.habits.length;
+
+    let head = document.getElementById('head');
+
+    head.innerHTML =
+        '<tr><th style="min-width:200px">Habit / routine</th>' +
+        Array.from({length:n}, (_,i) =>
+            `<th>${i+1}<br><span style="font-size:9px;font-weight:normal">${
+                new Date(
+                    +monthKey.slice(0,4),
+                    +monthKey.slice(5,7)-1,
+                    i+1
+                ).toLocaleDateString(undefined, {
+                    weekday:'short'
+                }).slice(0,2)
+            }</span></th>`
+        ).join('') +
+        '<th>Progress</th></tr>';
+
+    let body = document.getElementById('body');
+    body.innerHTML = '';
+
+    data.habits.forEach((habit,j) => {
+        let tr = document.createElement('tr');
+        let first = document.createElement('td');
+
+        let inp = document.createElement('input');
+        inp.type = 'text';
+        inp.className = 'habit-input';
+        inp.value = habit.name;
+        inp.setAttribute('aria-label','Habit name');
+
+        inp.onchange = () => {
+            habit.name = inp.value;
+            save();
+            renderWeekly();
+        };
+
+        let note = document.createElement('input');
+        note.type = 'text';
+        note.className = 'habit-input';
+        note.style.marginTop = '4px';
+        note.style.fontSize = '10px';
+        note.value = habit.note || '';
+        note.placeholder = 'Short reminder';
+
+        note.onchange = () => {
+            habit.note = note.value;
+            save();
+        };
+
+        first.append(inp,note);
+        tr.append(first);
+
+        data.checks.forEach((row,i) => {
+            let td = document.createElement('td');
+            let cb = document.createElement('input');
+
+            cb.type = 'checkbox';
+            cb.checked = !!row[j];
+            cb.setAttribute('aria-label', `${habit.name}, day ${i+1}`);
+
+            cb.onchange = () => {
+                data.checks[i][j] = cb.checked;
+                save();
+                updateStats();
+                renderWeekly();
+            };
+
+            td.append(cb);
+            tr.append(td);
+        });
+
+        let td = document.createElement('td');
+        td.className = 'progress-cell';
+
+        let val = data.checks.filter(r => r[j]).length;
+        let per = n ? Math.round(val/n*100) : 0;
+
+        td.innerHTML =
+            `<div class="progress-track"><div class="progress-fill" style="width:${per}%"></div></div>
+            <span class="progress-text">${per}% · ${val}/${n}</span>`;
+
+        tr.append(td);
+        body.append(tr);
+    });
+
+    let tr = document.createElement('tr');
+    tr.style.background = '#fff1f5';
+
+    let td = document.createElement('td');
+    td.innerHTML = '<b>Daily completion</b>';
+    tr.append(td);
+
+    data.checks.forEach((r,i) => {
+        let c = document.createElement('td');
+        c.innerHTML = `<b style="color:#a85d78">${dayPct(i)}%</b>`;
+        tr.append(c);
+    });
+
+    let end = document.createElement('td');
+
+    let total = n * h;
+    let overall = total
+        ? Math.round(data.checks.flat().filter(Boolean).length / total * 100)
+        : 0;
+
+    end.innerHTML = `<b style="color:#a85d78">${overall}%</b>`;
+
+    tr.append(end);
+    body.append(tr);
+}
+
+/* UPDATED: Weekly Snapshot now displays ALL habits instead of only 4 */
+function renderWeekly() {
+    let el = document.getElementById('weekGrid');
+    el.innerHTML = '';
+
+    for (
+        let start = 0;
+        start < data.checks.length;
+        start += Math.ceil(data.checks.length / 7)
+    ) {
+        let step = Math.ceil(data.checks.length / 7);
+        let end = Math.min(start + step, data.checks.length);
+
+        let card = document.createElement('div');
+        card.className = 'day-card';
+
+        let periodChecks = data.checks.slice(start, end);
+
+        let total = periodChecks.length * data.habits.length;
+
+        let completed = periodChecks.reduce(
+            (sum, row) => sum + row.filter(Boolean).length,
+            0
+        );
+
+        let pct = total ? Math.round(completed / total * 100) : 0;
+
+        card.innerHTML = `
+            <div class="day-head">
+                <b>${start+1} – ${end}</b>
+                <span>${monthName(monthKey)}</span>
+            </div>
+
+            <div class="day-content">
+                <div class="mini-ring"
+                    style="background:conic-gradient(var(--pink) ${pct}%,#f4e6eb 0)">
+                    <span>${pct}%</span>
+                </div>
+
+                <div style="text-align:center;font-size:10px;color:#9a8790">
+                    weekly completion
+                </div>
+
+                ${data.habits.map((h,j) => `
+                    <label class="day-task">
+                        <input
+                            type="checkbox"
+                            data-day="${start}"
+                            data-end="${end}"
+                            data-habit="${j}"
+                            ${periodChecks.every(r => !!r[j]) ? 'checked' : ''}
+                        >
+                        <span>${escapeHtml(h.name)}</span>
+                    </label>
+                `).join('')}
+            </div>
+        `;
+
+        el.append(card);
+    }
+
+    el.querySelectorAll('input[type=checkbox]').forEach(cb => {
+        cb.onchange = () => {
+            let day = +cb.dataset.day;
+            let end = +cb.dataset.end;
+            let j = +cb.dataset.habit;
+
+            for (let i = day; i < end; i++) {
+                data.checks[i][j] = cb.checked;
+            }
+
+            save();
+            renderAll();
+        };
+    });
+}
+
+function escapeHtml(s) {
+    return String(s).replace(/[&<>"']/g, c => ({
+        '&':'&amp;',
+        '<':'&lt;',
+        '>':'&gt;',
+        '"':'&quot;',
+        "'":'&#39;'
+    }[c]));
+}
+
+function renderAll() {
+    renderTable();
+    updateStats();
+    renderWeekly();
+
+    document.getElementById('reflection').value = data.reflection;
+    document.getElementById('gratitude').value = data.gratitude;
+}
+
+function switchMonth(m) {
+    if (!m) return;
+
+    save();
+    monthKey = m;
+    data = load(m);
+    monthInput.value = m;
+
+    renderAll();
+}
+
+monthInput.onchange = () => switchMonth(monthInput.value);
+
+document.getElementById('prev').onclick = () => {
+    let d = new Date(
+        +monthKey.slice(0,4),
+        +monthKey.slice(5,7)-2,
+        1
+    );
+
+    switchMonth(
+        `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`
+    );
+};
+
+document.getElementById('next').onclick = () => {
+    let d = new Date(
+        +monthKey.slice(0,4),
+        +monthKey.slice(5,7),
+        1
+    );
+
+    switchMonth(
+        `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`
+    );
+};
+
+document.getElementById('today').onclick = () => {
+    switchMonth(
+        `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}`
+    );
+};
+
+document.getElementById('reflection').oninput = e => {
+    data.reflection = e.target.value;
+    save();
+};
+
+document.getElementById('gratitude').oninput = e => {
+    data.gratitude = e.target.value;
+    save();
+};
+
+document.getElementById('clear').onclick = () => {
+    if (confirm('Reset all checkboxes for ' + monthName(monthKey) + '?')) {
+        data.checks = data.checks.map(() =>
+            data.habits.map(() => false)
+        );
+
+        save();
+        renderAll();
+    }
+};
+
+document.getElementById('export').onclick = () => {
+    let rows = [
+        ['Habit', ...data.checks.map((_,i) => i+1), 'Completion'],
+
+        ...data.habits.map((h,j) => [
+            h.name,
+            ...data.checks.map(r => r[j] ? 'Done' : 'Not done'),
+            Math.round(
+                data.checks.filter(r => r[j]).length /
+                data.checks.length * 100
+            ) + '%'
+        ]),
+
+        ['Daily completion', ...data.checks.map((r,i) => dayPct(i)+'%'), '']
+    ];
+
+    let csv = rows.map(r =>
+        r.map(v => '"' + String(v).replace(/"/g,'""') + '"').join(',')
+    ).join('\r\n');
+
+    let a = document.createElement('a');
+
+    a.href = URL.createObjectURL(
+        new Blob([csv], {type:'text/csv'})
+    );
+
+    a.download = 'habit-tracker-' + monthKey + '.csv';
+    a.click();
+
+    URL.revokeObjectURL(a.href);
+};
+
 renderAll();
 </script>
 </body>
