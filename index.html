@@ -8,20 +8,20 @@
 <link href="./dist/styles.css" rel="stylesheet">
 
 <style>
-:root{--pink:#e8a1b5;--pink2:#f7dce4;--pink3:#fff4f7;--plum:#79536a;--ink:#42343c;--muted:#8d7a83;--line:#eed7df;--white:#fff;--lav:#e9e0f5}
+:root{--pink:#f2a7c6;--pink2:#f9d7e8;--pink3:rgba(255,225,240,.78);--plum:#17121a;--ink:#17121a;--muted:#655965;--line:rgba(235,160,198,.48);--white:rgba(255,255,255,.78);--lav:#f0e4ff}
 *{box-sizing:border-box}
-body{margin:0;background:#fff9fb;color:var(--ink);font-family:Arial,Helvetica,sans-serif;padding:22px}
-.sheet{max-width:1200px;margin:auto;background:#fff;border:1px solid #f1dfe5;box-shadow:0 12px 35px #6b35420e;padding:22px;border-radius:18px}
+body{margin:0;background:radial-gradient(ellipse at 12% 8%,rgba(255,194,224,.62),transparent 34%),radial-gradient(ellipse at 88% 22%,rgba(224,203,255,.48),transparent 32%),linear-gradient(135deg,#fff8fc 0%,#fff0f7 48%,#f8f3ff 100%);color:var(--ink);font-family:Arial,Helvetica,sans-serif;padding:22px}
+.sheet{max-width:1200px;margin:auto;background:rgba(255,255,255,.66);backdrop-filter:blur(22px) saturate(145%);-webkit-backdrop-filter:blur(22px) saturate(145%);border:1px solid rgba(255,255,255,.9);box-shadow:0 20px 55px rgba(176,92,137,.13),inset 0 1px 0 rgba(255,255,255,.95),inset 0 0 35px rgba(255,218,237,.25);padding:22px;border-radius:22px}
 .top{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;border-bottom:2px solid var(--pink2);padding-bottom:18px}
-h1{font-family:Georgia,serif;font-size:clamp(25px,4vw,38px);margin:0;color:#a85d78;font-weight:600}
+h1{font-family:Georgia,serif;font-size:clamp(25px,4vw,38px);margin:0;color:#17121a;font-weight:600;text-shadow:0 0 22px rgba(255,255,255,.9)}
 .sub{margin:7px 0 0;color:var(--muted);font-size:13px}
 .controls{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-.controls button,.controls select,.controls input{border:1px solid var(--line);background:white;color:var(--ink);padding:9px 12px;border-radius:9px;font-size:13px}
+.controls button,.controls select,.controls input{border:1px solid rgba(232,150,190,.48);background:rgba(255,255,255,.68);backdrop-filter:blur(12px);color:#17121a;padding:9px 12px;border-radius:11px;font-size:13px;box-shadow:inset 0 1px 0 rgba(255,255,255,.95),0 4px 14px rgba(185,106,148,.08)}
 .controls button{cursor:pointer}
-.controls button.primary{background:var(--pink);color:#fff;border-color:var(--pink);font-weight:bold}
-.section-title{font-family:Georgia,serif;font-size:20px;color:#a85d78;margin:22px 0 12px}
+.controls button.primary{background:linear-gradient(135deg,rgba(255,202,226,.92),rgba(239,151,191,.82));color:#17121a;border-color:rgba(227,132,176,.55);font-weight:bold;box-shadow:inset 0 1px 0 rgba(255,255,255,.9),0 5px 18px rgba(210,115,163,.18)}
+.section-title{font-family:Georgia,serif;font-size:20px;color:#17121a;margin:22px 0 12px;text-shadow:0 0 18px rgba(255,255,255,.9)}
 .dashboard{display:grid;grid-template-columns:1.35fr 1fr 1fr;gap:12px}
-.panel{border:1px solid var(--line);border-radius:13px;padding:15px;background:linear-gradient(145deg,#fff,#fff8fa);min-width:0}
+.panel{border:1px solid rgba(255,255,255,.92);border-radius:16px;padding:15px;background:linear-gradient(145deg,rgba(255,255,255,.82),rgba(255,238,247,.62));backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:0 8px 24px rgba(185,105,149,.08),inset 0 1px 0 rgba(255,255,255,.98),inset 0 0 24px rgba(255,255,255,.52);min-width:0}
 .panel h3{font-size:13px;text-transform:uppercase;letter-spacing:1px;color:var(--plum);margin:0 0 12px}
 .chart{height:150px;display:flex;align-items:flex-end;gap:10px;padding:12px 5px 0;border-bottom:1px solid var(--line)}
 .bar-wrap{height:100%;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:6px;font-size:10px;color:var(--muted)}
@@ -81,40 +81,6 @@ input[type=text],textarea{border:1px solid var(--line);border-radius:7px;padding
 .reflection label{display:block;color:#9f5d77;font-size:12px;font-weight:bold;margin-bottom:8px}
 .reflection textarea{width:100%;min-height:95px;resize:vertical;background:#fff}
 .footer{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:16px;color:var(--muted);font-size:11px}
-.footer > div{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-.footer button{
-    border:1px solid var(--line);
-    background:var(--pink3);
-    color:var(--plum);
-    padding:9px 13px;
-    border-radius:9px;
-    font-size:12px;
-    font-weight:700;
-    cursor:pointer;
-    transition:background .2s ease,transform .2s ease,border-color .2s ease;
-}
-.footer button:hover{
-    background:var(--pink2);
-    border-color:var(--pink);
-    transform:translateY(-1px);
-}
-.footer button:focus-visible{
-    outline:2px solid var(--pink);
-    outline-offset:2px;
-}
-.footer #clear{
-    background:var(--pink);
-    color:#fff;
-    border-color:var(--pink);
-}
-.footer #clear:hover{
-    background:#d985a1;
-    border-color:#d985a1;
-}
-@media print{
-    .footer > div{display:none}
-}
-
 
 .learning-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
 .learning-item{display:flex;gap:10px;align-items:flex-start;border:1px solid var(--line);border-radius:11px;padding:12px;background:#fff9fb}
@@ -136,6 +102,25 @@ input[type=text],textarea{border:1px solid var(--line);border-radius:7px;padding
 .task-editor-actions button{border:0;border-radius:8px;padding:9px 13px;cursor:pointer;font-weight:700}
 .task-save{background:var(--plum);color:white}
 .task-cancel{background:#f7eaf0;color:var(--plum)}
+/* Glassy pink theme overrides */
+.learning-item,.task-card,.day-card,.reflection,.table-wrap,.week-card{background:linear-gradient(145deg,rgba(255,255,255,.82),rgba(255,226,240,.48));border-color:rgba(255,255,255,.92);box-shadow:0 8px 24px rgba(181,100,145,.08),inset 0 1px 0 rgba(255,255,255,.96),inset 0 0 22px rgba(255,255,255,.45)}
+.learning-item strong,.task-card h3,.task-label,.task-edit-field label,.panel h3,.reflection label,.day-task,.week-grid,.stats b,.legend b{color:#17121a}
+.learning-number{color:#17121a;background:linear-gradient(145deg,rgba(255,220,237,.92),rgba(239,157,194,.72));border:1px solid rgba(255,255,255,.95);box-shadow:inset 0 1px 0 rgba(255,255,255,.95),0 4px 14px rgba(190,99,148,.12)}
+.task-edit-field input,.task-edit-field textarea,.reflection textarea{color:#17121a;background:rgba(255,255,255,.78);border-color:rgba(229,151,189,.48);box-shadow:inset 0 1px 8px rgba(194,120,157,.05)}
+.footer button{color:#17121a;background:linear-gradient(145deg,rgba(255,228,241,.9),rgba(246,188,216,.7));border-color:rgba(228,143,184,.5);box-shadow:inset 0 1px 0 rgba(255,255,255,.95),0 5px 15px rgba(188,101,146,.1)}
+.footer #clear{color:#17121a;background:linear-gradient(145deg,#ffd8e9,#f1a8ca);border-color:rgba(222,125,171,.55)}
+input,textarea,button,select{accent-color:#df8eb5}
+
+/* Refined styling for the four requested buttons only */
+#editTasksToggle,#export,.footer button{border:1px solid rgba(218,126,170,.58);border-radius:13px;font-weight:700;letter-spacing:.15px;cursor:pointer;transition:transform .18s ease,box-shadow .18s ease,background .18s ease;box-shadow:inset 0 1px 0 rgba(255,255,255,.98),0 6px 16px rgba(194,103,151,.16)}
+#editTasksToggle{background:linear-gradient(135deg,#fffafd 0%,#ffe0ee 55%,#f7c0d9 100%);color:#21151d;padding:10px 15px}
+#export{background:linear-gradient(135deg,#ffe6f1 0%,#f4b4d1 100%);color:#21151d;border-color:rgba(218,126,170,.62)}
+.footer button{padding:10px 15px;color:#21151d;background:linear-gradient(135deg,rgba(255,255,255,.96),rgba(255,222,238,.92))}
+.footer #clear{background:linear-gradient(135deg,#ffd9e9 0%,#f2a5c8 100%);border-color:rgba(211,103,157,.62)}
+#editTasksToggle:hover,#export:hover,.footer button:hover{transform:translateY(-2px);box-shadow:inset 0 1px 0 rgba(255,255,255,.98),0 9px 21px rgba(194,103,151,.24)}
+#editTasksToggle:active,#export:active,.footer button:active{transform:translateY(0)}
+#editTasksToggle:focus-visible,#export:focus-visible,.footer button:focus-visible{outline:3px solid rgba(205,104,157,.35);outline-offset:3px}
+
 @media(max-width:800px){.learning-grid,.task-grid{grid-template-columns:1fr}}
 
 
